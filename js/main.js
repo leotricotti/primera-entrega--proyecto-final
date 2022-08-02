@@ -121,21 +121,25 @@ function continuar(continuo) {
 }
 
 //Función para consultas
-function consultar(op) {
+
+function ordenar (array){
+  array.sort((a, b) => {
+  if (a.fecha > b.fecha) {
+    return 1;
+  }
+  if (a.fecha < b.fecha) {
+    return -1;
+  }
+})};
+
+function consultar(op, fn) {
   op = prompt(
     "Seleccione la operación deseada: \n1) Consulta de saldo \n2) Ultimos movimientos \n3) Menu Principal"
   );
   if (op == "1") {
     return alert("Su saldo es: " + convertir(saldo));
   } else if (op == "2") {
-    operaciones.sort((a, b) => {
-      if (a.fecha > b.fecha) {
-        return 1;
-      }
-      if (a.fecha < b.fecha) {
-        return -1;
-      }
-    });
+    fn = ordenar(operaciones);
     return console.table(operaciones);
   } else if (op == "3") {
     return (seleccion = prompt(
